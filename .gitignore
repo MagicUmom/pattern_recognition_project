@@ -99,3 +99,11 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+dataset/false/
+
+dataset/true/
+
+dataset/false_resize/
+
+dataset/true_resize/

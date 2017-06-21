@@ -21,5 +21,5 @@ for image in os.listdir(img_false_dir):
     # if width < min_w :
     #     print(image,width)
     im2 = im.resize((width, height), Image.BILINEAR)
-    im2.save(target_path+image)
+    im2.save(target_path+image,'PNG')
     # print(w/h)

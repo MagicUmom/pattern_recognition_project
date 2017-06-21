@@ -8,40 +8,39 @@ from sklearn import svm, metrics
 from collections import defaultdict
 import numpy as np
 
-img_true_dir = "dataset/true/"
-img_false_dir = "dataset/false/"
-images = np.array
-targets = np.array
+img_true_dir = "dataset/true_resize/"
+img_false_dir = "dataset/false_resize/"
+images = []
+targets = []
 # The dataset
 for image in os.listdir(img_true_dir):
-    images = np.concatenate(images,np.array(list(Image.open(img_true_dir+image).convert('L').getdata())))
-    targets = np.concatenate(targets,[1])
-    # images_true.image.append(ns.array(list(Image.open(img_true_dir+image).convert('L').getdata())))
-    # images_true.append(ns.array(list(Image.open(img_true_dir+image).convert('L').getdata())))
-
-pixels = np.array
-for pix in images :
-    pixels.append(pix)
+    images.append(np.array(list(Image.open(img_true_dir + image).convert('L').getdata())))
+    targets.append(1)
 
 i = 1
 n_samples = len(images)
 for image in os.listdir(img_false_dir):
     images.append(np.array(list(Image.open(img_false_dir+image).convert('L').getdata())))
-    target.append(0)
+    targets.append(0)
     i+=1
     if i > n_samples:
         break
+
+images = np.array(images)
+targets = np.array(targets)
+
+
 data = images.reshape(n_samples,-1)
 
 # Create a classifier: a support vector classifier
 classifier = svm.SVC(gamma=0.001)
 
 # We learn the digits on the first half of the digits
-classifier.fit(dataset['image'][0::2], dataset['target'][0::2])
+classifier.fit(images[0::2], targets[0::2])
 
 # Now predict the value of the digit on the second half:
-expected = dataset['target'][1::2]
-predicted = classifier.predict(dataset['image'][1::2])
+expected = targets[1::2]
+predicted = classifier.predict(images[1::2])
 
 print("Classification report for classifier %s:\n%s\n"
     % (classifier, metrics.classification_report(expected, predicted)))

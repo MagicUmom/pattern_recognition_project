@@ -103,3 +103,7 @@ ENV/
 dataset/false/
 
 dataset/true/
+
+dataset/false_resize/
+
+dataset/true_resize/

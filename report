@@ -1,0 +1,276 @@
+len of img_train, target_train, img_test, target_test : 226, 226, 96, 96
+Classification report for classifier KNeighborsClassifier(algorithm='auto', leaf_size=30, metric='minkowski',
+           metric_params=None, n_jobs=1, n_neighbors=3, p=2,
+           weights='uniform'):
+             precision    recall  f1-score   support
+
+          0       0.77      0.98      0.86        48
+          1       0.97      0.71      0.82        48
+
+avg / total       0.87      0.84      0.84        96
+
+
+Confusion matrix:
+[[47  1]
+ [14 34]]
+Classification report for classifier SVC(C=0.025, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False):
+             precision    recall  f1-score   support
+
+          0       0.87      0.94      0.90        48
+          1       0.93      0.85      0.89        48
+
+avg / total       0.90      0.90      0.90        96
+
+
+Confusion matrix:
+[[45  3]
+ [ 7 41]]
+Classification report for classifier SVC(C=1, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma=2, kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False):
+             precision    recall  f1-score   support
+
+          0       0.52      1.00      0.69        48
+          1       1.00      0.08      0.15        48
+
+avg / total       0.76      0.54      0.42        96
+
+
+Confusion matrix:
+[[48  0]
+ [44  4]]
+Classification report for classifier DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=5,
+            max_features=None, max_leaf_nodes=None,
+            min_impurity_split=1e-07, min_samples_leaf=1,
+            min_samples_split=2, min_weight_fraction_leaf=0.0,
+            presort=False, random_state=None, splitter='best'):
+             precision    recall  f1-score   support
+
+          0       0.81      0.81      0.81        48
+          1       0.81      0.81      0.81        48
+
+avg / total       0.81      0.81      0.81        96
+
+
+Confusion matrix:
+[[39  9]
+ [ 9 39]]
+Classification report for classifier RandomForestClassifier(bootstrap=True, class_weight=None, criterion='gini',
+            max_depth=5, max_features=1, max_leaf_nodes=None,
+            min_impurity_split=1e-07, min_samples_leaf=1,
+            min_samples_split=2, min_weight_fraction_leaf=0.0,
+            n_estimators=10, n_jobs=1, oob_score=False, random_state=None,
+            verbose=0, warm_start=False):
+             precision    recall  f1-score   support
+
+          0       0.96      0.92      0.94        48
+          1       0.92      0.96      0.94        48
+
+avg / total       0.94      0.94      0.94        96
+
+
+Confusion matrix:
+[[44  4]
+ [ 2 46]]
+Classification report for classifier AdaBoostClassifier(algorithm='SAMME.R', base_estimator=None,
+          learning_rate=1.0, n_estimators=50, random_state=None):
+             precision    recall  f1-score   support
+
+          0       0.96      0.92      0.94        48
+          1       0.92      0.96      0.94        48
+
+avg / total       0.94      0.94      0.94        96
+
+
+Confusion matrix:
+[[44  4]
+ [ 2 46]]
+Classification report for classifier GaussianNB(priors=None):
+             precision    recall  f1-score   support
+
+          0       1.00      0.94      0.97        48
+          1       0.94      1.00      0.97        48
+
+avg / total       0.97      0.97      0.97        96
+
+
+Confusion matrix:
+[[45  3]
+ [ 0 48]]
+Classification report for classifier LinearDiscriminantAnalysis(n_components=None, priors=None, shrinkage=None,
+              solver='svd', store_covariance=False, tol=0.0001):
+             precision    recall  f1-score   support
+
+          0       0.74      0.67      0.70        48
+          1       0.70      0.77      0.73        48
+
+avg / total       0.72      0.72      0.72        96
+
+
+Confusion matrix:
+[[32 16]
+ [11 37]]
+Classification report for classifier QuadraticDiscriminantAnalysis(priors=None, reg_param=0.0,
+               store_covariances=False, tol=0.0001):
+             precision    recall  f1-score   support
+
+          0       0.55      0.96      0.70        48
+          1       0.85      0.23      0.36        48
+
+avg / total       0.70      0.59      0.53        96
+
+
+Confusion matrix:
+[[46  2]
+ [37 11]]
+len of img_train, target_train, img_test, target_test : 226, 226, 96, 96
+Classification report for classifier KNeighborsClassifier(algorithm='auto', leaf_size=30, metric='minkowski',
+           metric_params=None, n_jobs=1, n_neighbors=3, p=2,
+           weights='uniform'):
+             precision    recall  f1-score   support
+
+          0       0.77      0.98      0.86        48
+          1       0.97      0.71      0.82        48
+
+avg / total       0.87      0.84      0.84        96
+
+
+Confusion matrix:
+[[47  1]
+ [14 34]]
+
+
+Classification report for classifier SVC(C=0.025, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False):
+             precision    recall  f1-score   support
+
+          0       0.87      0.94      0.90        48
+          1       0.93      0.85      0.89        48
+
+avg / total       0.90      0.90      0.90        96
+
+
+Confusion matrix:
+[[45  3]
+ [ 7 41]]
+
+
+Classification report for classifier SVC(C=1, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma=2, kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False):
+             precision    recall  f1-score   support
+
+          0       0.52      1.00      0.69        48
+          1       1.00      0.08      0.15        48
+
+avg / total       0.76      0.54      0.42        96
+
+
+Confusion matrix:
+[[48  0]
+ [44  4]]
+
+
+Classification report for classifier DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=5,
+            max_features=None, max_leaf_nodes=None,
+            min_impurity_split=1e-07, min_samples_leaf=1,
+            min_samples_split=2, min_weight_fraction_leaf=0.0,
+            presort=False, random_state=None, splitter='best'):
+             precision    recall  f1-score   support
+
+          0       0.84      0.88      0.86        48
+          1       0.87      0.83      0.85        48
+
+avg / total       0.85      0.85      0.85        96
+
+
+Confusion matrix:
+[[42  6]
+ [ 8 40]]
+
+
+Classification report for classifier RandomForestClassifier(bootstrap=True, class_weight=None, criterion='gini',
+            max_depth=5, max_features=1, max_leaf_nodes=None,
+            min_impurity_split=1e-07, min_samples_leaf=1,
+            min_samples_split=2, min_weight_fraction_leaf=0.0,
+            n_estimators=10, n_jobs=1, oob_score=False, random_state=None,
+            verbose=0, warm_start=False):
+             precision    recall  f1-score   support
+
+          0       0.91      0.85      0.88        48
+          1       0.86      0.92      0.89        48
+
+avg / total       0.89      0.89      0.89        96
+
+
+Confusion matrix:
+[[41  7]
+ [ 4 44]]
+
+
+Classification report for classifier AdaBoostClassifier(algorithm='SAMME.R', base_estimator=None,
+          learning_rate=1.0, n_estimators=50, random_state=None):
+             precision    recall  f1-score   support
+
+          0       0.96      0.92      0.94        48
+          1       0.92      0.96      0.94        48
+
+avg / total       0.94      0.94      0.94        96
+
+
+Confusion matrix:
+[[44  4]
+ [ 2 46]]
+
+
+Classification report for classifier GaussianNB(priors=None):
+             precision    recall  f1-score   support
+
+          0       1.00      0.94      0.97        48
+          1       0.94      1.00      0.97        48
+
+avg / total       0.97      0.97      0.97        96
+
+
+Confusion matrix:
+[[45  3]
+ [ 0 48]]
+
+
+Classification report for classifier LinearDiscriminantAnalysis(n_components=None, priors=None, shrinkage=None,
+              solver='svd', store_covariance=False, tol=0.0001):
+             precision    recall  f1-score   support
+
+          0       0.74      0.67      0.70        48
+          1       0.70      0.77      0.73        48
+
+avg / total       0.72      0.72      0.72        96
+
+
+Confusion matrix:
+[[32 16]
+ [11 37]]
+
+
+Classification report for classifier QuadraticDiscriminantAnalysis(priors=None, reg_param=0.0,
+               store_covariances=False, tol=0.0001):
+             precision    recall  f1-score   support
+
+          0       0.55      0.96      0.70        48
+          1       0.85      0.23      0.36        48
+
+avg / total       0.70      0.59      0.53        96
+
+
+Confusion matrix:
+[[46  2]
+ [37 11]]
+
+

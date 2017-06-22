@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e48911d5-5db5-4cdc-a8d9-4beeaa5b8075" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/circle.py" afterPath="$PROJECT_DIR$/circle.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resize.py" afterPath="$PROJECT_DIR$/resize.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/svm_line.py" afterPath="$PROJECT_DIR$/svm_line.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -52,14 +48,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="svm_line.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="svm_line.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/svm_line.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="41" column="20" lean-forward="true" selection-start-line="41" selection-start-column="20" selection-end-line="41" selection-end-column="20" />
+            <state relative-caret-position="705">
+              <caret line="47" column="36" lean-forward="false" selection-start-line="47" selection-start-column="36" selection-end-line="47" selection-end-column="36" />
               <folding>
                 <element signature="e#37#58#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="machineLearn_line.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/machineLearn_line.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="178">
+              <caret line="47" column="20" lean-forward="true" selection-start-line="47" selection-start-column="20" selection-end-line="47" selection-end-column="20" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -92,7 +98,7 @@
         <entry file="file://$PROJECT_DIR$/resize.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="315">
-              <caret line="21" column="24" lean-forward="true" selection-start-line="21" selection-start-column="24" selection-end-line="21" selection-end-column="24" />
+              <caret line="21" column="24" lean-forward="false" selection-start-line="21" selection-start-column="24" selection-end-line="21" selection-end-column="24" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -131,6 +137,8 @@
         <option value="$PROJECT_DIR$/circle.py" />
         <option value="$PROJECT_DIR$/resize.py" />
         <option value="$PROJECT_DIR$/svm_line.py" />
+        <option value="$PROJECT_DIR$/linear_line.py" />
+        <option value="$PROJECT_DIR$/machineLearn_line.py" />
       </list>
     </option>
   </component>
@@ -214,7 +222,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.svm_line">
+  <component name="RunManager" selected="Python.linear_line">
     <configuration default="false" name="svm_line" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -269,24 +277,6 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <method />
     </configuration>
-    <configuration default="false" name="0217_circle" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="pattern_recognition_project" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/0217_circle.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <method />
-    </configuration>
     <configuration default="false" name="rotate" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -300,6 +290,24 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="pattern_recognition_project" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/rotate.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="linear_line" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="pattern_recognition_project" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/linear_line.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -373,16 +381,16 @@
       <item index="0" class="java.lang.String" itemvalue="Python.svm_line" />
       <item index="1" class="java.lang.String" itemvalue="Python.resize" />
       <item index="2" class="java.lang.String" itemvalue="Python.circle" />
-      <item index="3" class="java.lang.String" itemvalue="Python.0217_circle" />
-      <item index="4" class="java.lang.String" itemvalue="Python.rotate" />
+      <item index="3" class="java.lang.String" itemvalue="Python.rotate" />
+      <item index="4" class="java.lang.String" itemvalue="Python.linear_line" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.svm_line" />
-        <item index="1" class="java.lang.String" itemvalue="Python.resize" />
-        <item index="2" class="java.lang.String" itemvalue="Python.circle" />
-        <item index="3" class="java.lang.String" itemvalue="Python.rotate" />
-        <item index="4" class="java.lang.String" itemvalue="Python.0217_circle" />
+        <item index="0" class="java.lang.String" itemvalue="Python.linear_line" />
+        <item index="1" class="java.lang.String" itemvalue="Python.svm_line" />
+        <item index="2" class="java.lang.String" itemvalue="Python.resize" />
+        <item index="3" class="java.lang.String" itemvalue="Python.circle" />
+        <item index="4" class="java.lang.String" itemvalue="Python.rotate" />
       </list>
     </recent_temporary>
   </component>
@@ -451,26 +459,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/mysvm.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="935">
-          <caret line="55" column="0" lean-forward="false" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
-          <folding>
-            <element signature="e#146#177#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/svm_line.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="404">
-          <caret line="50" column="77" lean-forward="true" selection-start-line="50" selection-start-column="77" selection-end-line="50" selection-end-column="77" />
-          <folding>
-            <element signature="e#37#58#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/0217_circle.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -902,7 +890,7 @@
     <entry file="file://$PROJECT_DIR$/resize.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
-          <caret line="21" column="24" lean-forward="true" selection-start-line="21" selection-start-column="24" selection-end-line="21" selection-end-column="24" />
+          <caret line="21" column="24" lean-forward="false" selection-start-line="21" selection-start-column="24" selection-end-line="21" selection-end-column="24" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
@@ -929,13 +917,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/linear_line.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="217">
+          <caret line="16" column="29" lean-forward="false" selection-start-line="16" selection-start-column="29" selection-end-line="16" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/svm_line.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="41" column="20" lean-forward="true" selection-start-line="41" selection-start-column="20" selection-end-line="41" selection-end-column="20" />
+        <state relative-caret-position="705">
+          <caret line="47" column="36" lean-forward="false" selection-start-line="47" selection-start-column="36" selection-end-line="47" selection-end-column="36" />
           <folding>
             <element signature="e#37#58#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/machineLearn_line.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="178">
+          <caret line="47" column="20" lean-forward="true" selection-start-line="47" selection-start-column="20" selection-end-line="47" selection-end-column="20" />
+          <folding />
         </state>
       </provider>
     </entry>

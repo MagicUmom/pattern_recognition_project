@@ -10,7 +10,7 @@ import sys
 import math
 import operator
 
-pic_path = 'z12.jpg'
+pic_path = 'dataset/true/5.png'
 rect_scale = 5
 rect_area = 0
 rect_min_area = 0.0010
@@ -19,29 +19,34 @@ hvs_luminance = 190
 angle_limit = 8
 top_ext_dist = 4
 cluster_dist = 20
-#---------------------------------------------------------
+# ---------------------------------------------------------
 pic_width = 0
 pic_height = 0
-#---------------------------------------------------------
-def CalculateOneLineAndOnePointMinDistance(a,b,c):
-    u = np.array([b[0] - a[0], (pic_height-b[1]) - (pic_height-a[1])])
-    v = np.array([c[0] - a[0], (pic_height-c[1]) - (pic_height-a[1])])
+
+
+# ---------------------------------------------------------
+def CalculateOneLineAndOnePointMinDistance(a, b, c):
+    u = np.array([b[0] - a[0], (pic_height - b[1]) - (pic_height - a[1])])
+    v = np.array([c[0] - a[0], (pic_height - c[1]) - (pic_height - a[1])])
     if (linalg.norm(u) > 0):
         L = abs(cross(u, v) / linalg.norm(u))
     else:
-        L = sys.maxint
+        L = int()
     return L
+
 
 def CalculateTwoPointDistance(src, dst):
     a = np.array(src)
     b = np.array(dst)
-    return np.linalg.norm(b-a)
+    return np.linalg.norm(b - a)
+
 
 def PointConvertDegree(center, point1):
-    angle = math.degrees(math.atan2((pic_height-point1[1]) - (pic_height-center[1]), point1[0] - center[0]))
-    if (angle < 0) :
+    angle = math.degrees(math.atan2((pic_height - point1[1]) - (pic_height - center[1]), point1[0] - center[0]))
+    if (angle < 0):
         angle = 360 + angle
     return angle
+
 
 def DegreeCompare(angleRef, angleDst):
     result = angleDst - angleRef
@@ -51,12 +56,14 @@ def DegreeCompare(angleRef, angleDst):
         result = result + 360
     return result
 
+
 def DegreeMirror(angle):
     if angle > 180:
         angle += 180
         if angle >= 360:
             angle -= 360
     return angle
+
 
 def GetRectColor(img, rect):
     m1 = np.zeros(img.shape, np.uint8)
@@ -72,8 +79,9 @@ def GetRectColor(img, rect):
     maxidx0, maxval0 = max(enumerate(hist0), key=operator.itemgetter(1))
     maxidx1, maxval1 = max(enumerate(hist1), key=operator.itemgetter(1))
     maxidx2, maxval2 = max(enumerate(hist2), key=operator.itemgetter(1))
-    #return (maxidx0, maxidx1, maxidx2)
+    # return (maxidx0, maxidx1, maxidx2)
     return (maxval0, maxval1, maxval2)
+
 
 '''
 def GetRectColorHsv(img):
@@ -90,8 +98,10 @@ def GetRectColorHsv(img):
     return (maxidx0, maxidx1, maxidx2)
 '''
 
+
 def drawPoint(img, point, size=1, color=(0, 0, 255)):
     cv2.circle(img, point, size, color, -1)
+
 
 def FindCluster(cluster, idx1, idx2, rectWH):
     ret_cluster = []
@@ -99,13 +109,14 @@ def FindCluster(cluster, idx1, idx2, rectWH):
         pos = cluster[i]
         if pos != cluster[idx1] and pos != cluster[idx2]:
             dist = CalculateOneLineAndOnePointMinDistance(cluster[idx1], cluster[idx2], pos)
-            limitDist = (rectWH[i][0]/(pic_width/4))
+            limitDist = (rectWH[i][0] / (pic_width / 4))
             if limitDist < cluster_dist:
                 limitDist = cluster_dist
             angle = abs(DegreeCompare(rectWH[i][2], rectWH[idx1][2]))
             if dist < limitDist and angle < angle_limit:
                 ret_cluster.append(i)
     return ret_cluster
+
 
 def CheckCluster(rectCenter, rectWH):
     maxNum = 0
@@ -132,10 +143,10 @@ def CheckCluster(rectCenter, rectWH):
         dst_pos.append(rectCenter[pos])
         dst_idx.append(pos)
 
-    #drawPoint(image, dst_pos[0], 5, (0, 255, 0))
-    #cv2.drawContours(image, [rectPos[dst_idx[0]]], 0, (0, 0, 255), 1)
-    #drawPoint(image, dst_pos[1], 5, (0, 0, 255))
-    #cv2.drawContours(image, [rectPos[dst_idx[1]]], 0, (0, 0, 255), 1)
+    # drawPoint(image, dst_pos[0], 5, (0, 255, 0))
+    # cv2.drawContours(image, [rectPos[dst_idx[0]]], 0, (0, 0, 255), 1)
+    # drawPoint(image, dst_pos[1], 5, (0, 0, 255))
+    # cv2.drawContours(image, [rectPos[dst_idx[1]]], 0, (0, 0, 255), 1)
 
     '''
     for pos in dst_pos:
@@ -148,6 +159,7 @@ def CheckCluster(rectCenter, rectWH):
     '''
     return dst_idx
 
+
 def findFourSide(contour):
     param = 0.001
     approx = []
@@ -158,6 +170,7 @@ def findFourSide(contour):
         if approx.__len__() == 4:
             break
     return approx
+
 
 def findBottomSide(rect, angle):
     boxRect = []
@@ -187,6 +200,7 @@ def findBottomSide(rect, angle):
     else:
         return [boxRect[bottomIdx], boxRect[bottomIdxNext]]
 
+
 def findTopSide(rect, angle):
     boxRect = []
     for pos in rect:
@@ -215,6 +229,7 @@ def findTopSide(rect, angle):
     else:
         return [boxRect[TopIdx], boxRect[TopIdxNext]]
 
+
 def rotatePoint(origin, point, angle):
     angle = math.radians(360 - angle)
     ox, oy = origin
@@ -222,6 +237,8 @@ def rotatePoint(origin, point, angle):
     qx = ox + math.cos(angle) * (px - ox) - math.sin(angle) * (py - oy)
     qy = oy + math.sin(angle) * (px - ox) + math.cos(angle) * (py - oy)
     return qx, qy
+
+
 '''
 def checkTheSamePoint(src1, src2):
     if src1[0] == src2[0]:
@@ -283,21 +300,22 @@ def findSide(contour, angle):
     bottom = np.array(findBottomSide(approx, sideAngle))
     top = np.array(findTopSide(approx, sideAngle))
 
-    #angle1 = DegreeMirror(PointConvertDegree(top[0], top[1]))
-    #angle2 = DegreeMirror(PointConvertDegree(bottom[0], bottom[1]))
+    # angle1 = DegreeMirror(PointConvertDegree(top[0], top[1]))
+    # angle2 = DegreeMirror(PointConvertDegree(bottom[0], bottom[1]))
 
-    #print "diff:", abs(DegreeCompare(angle1, angle2))
+    # print "diff:", abs(DegreeCompare(angle1, angle2))
 
-    #if abs(DegreeCompare(angle1, angle2)) > 5:
+    # if abs(DegreeCompare(angle1, angle2)) > 5:
     #    fixTopSide(img, approx, bottom)
 
-    #cv2.drawContours(img, [approx], 0, (0, 0, 255), 1)
-    #cv2.drawContours(img, [bottom], 0, (255, 0, 255), 2)
-    #cv2.drawContours(img, [top], 0, (255, 0, 0), 2)
+    # cv2.drawContours(img, [approx], 0, (0, 0, 255), 1)
+    # cv2.drawContours(img, [bottom], 0, (255, 0, 255), 2)
+    # cv2.drawContours(img, [top], 0, (255, 0, 0), 2)
 
-    #drawPoint(img, tuple(top[0]), 5, (0, 255, 0))
+    # drawPoint(img, tuple(top[0]), 5, (0, 255, 0))
 
     return [top, bottom]
+
 
 def fixPoint(pos):
     x = pos[0]
@@ -306,11 +324,12 @@ def fixPoint(pos):
         x = 0
     if y < 0:
         y = 0
-    #if x > pic_width:
+    # if x > pic_width:
     #    x = pic_width - 1
-    #if y > pic_height:
+    # if y > pic_height:
     #    y = pic_height - 1
     return [x, y]
+
 
 def getTopSideRect(pos):
     if pos[0][0] > pos[1][0]:
@@ -348,14 +367,14 @@ def getTopSideRect(pos):
     pos1 = fixPoint(extendPoint(pos1, addDist, angle - 180))
     pos2 = fixPoint(extendPoint(pos2, addDist, angle))
 
-    #pos2 = fixPoint(extendPoint(pos2[0], pos2[1], dist / top_ext_dist, angle + 90))
+    # pos2 = fixPoint(extendPoint(pos2[0], pos2[1], dist / top_ext_dist, angle + 90))
     #
     NewP1 = extendPoint(pos1, dist / 2, angle)
-    NewPointA = np.int0(rotatePoint(pos1, NewP1, angle+90))
+    NewPointA = np.int0(rotatePoint(pos1, NewP1, angle + 90))
     NewPointA = fixPoint(NewPointA)
     #
     NewP2 = extendPoint(pos2, dist / 2, angle)
-    NewPointB = np.int0(rotatePoint(pos2, NewP2, angle+90))
+    NewPointB = np.int0(rotatePoint(pos2, NewP2, angle + 90))
     NewPointB = fixPoint(NewPointB)
     #
     dst_rect = []
@@ -395,31 +414,34 @@ def getBopttomSideRect(pos):
 
     return dst_rect
 
+
 def extendPoint(pos, d, theta):
-    theta_rad = pi/2 - radians(theta + 90)
-    return np.int0([pos[0] + d*cos(theta_rad), pos[1] + d*sin(theta_rad)])
-#---------------------------------------------------------
+    theta_rad = pi / 2 - radians(theta + 90)
+    return np.int0([pos[0] + d * cos(theta_rad), pos[1] + d * sin(theta_rad)])
+
+
+# ---------------------------------------------------------
 def FindZebraCrossing(filePath):
-    srcImg = image = cv2.imread(filePath)  #original
+    srcImg = image = cv2.imread(filePath)  # original
     pic_width = image.shape[1]
     pic_height = image.shape[0]
 
     rect_area = np.int((pic_width * pic_height * 1.0) * rect_min_area)
 
     # Color Filter
-    hsv = cv2.cvtColor(srcImg, cv2.COLOR_BGR2HSV) #hsv
+    hsv = cv2.cvtColor(srcImg, cv2.COLOR_BGR2HSV)  # hsv
     low_color = np.array([0, 0, hvs_luminance])
     # low_color = np.array([0, 0, 180])
     upper_color = np.array([180, 43, 255])
     mask = cv2.inRange(hsv, low_color, upper_color)
-    res = cv2.bitwise_and(srcImg, srcImg, mask=mask) #filter image
-    
+    res = cv2.bitwise_and(srcImg, srcImg, mask=mask)  # filter image
+
     # Fix Image Color
     image = cv2.cvtColor(srcImg, cv2.COLOR_BGR2RGB)
 
     # canny
     img_gray = cv2.cvtColor(res, cv2.COLOR_BGR2GRAY)
-    canny_img = cv2.Canny(img_gray, 150, 220, apertureSize=3) #canny
+    canny_img = cv2.Canny(img_gray, 150, 220, apertureSize=3)  # canny
 
     contours, hierarchy = cv2.findContours(canny_img, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)  # for CV2
     print("Contours:{} ", len(contours))
@@ -436,7 +458,8 @@ def FindZebraCrossing(filePath):
 
     return None
 
-#---------------------------------------------------------
+
+# ---------------------------------------------------------
 fig = plt.figure()
 srcImg = image = cv2.imread(pic_path)
 
@@ -445,11 +468,10 @@ pic_height = image.shape[0]
 
 rect_area = np.int((pic_width * pic_height * 1.0) * rect_min_area)
 
-
 # Color Filter
 hsv = cv2.cvtColor(srcImg, cv2.COLOR_BGR2HSV)
 low_color = np.array([0, 0, hvs_luminance])
-#low_color = np.array([0, 0, 180])
+# low_color = np.array([0, 0, 180])
 upper_color = np.array([180, 43, 255])
 mask = cv2.inRange(hsv, low_color, upper_color)
 res = cv2.bitwise_and(srcImg, srcImg, mask=mask)
@@ -457,13 +479,13 @@ res = cv2.bitwise_and(srcImg, srcImg, mask=mask)
 # Fix Image Color
 image = cv2.cvtColor(srcImg, cv2.COLOR_BGR2RGB)
 
-#canny
+# canny
 img_gray = cv2.cvtColor(res, cv2.COLOR_BGR2GRAY)
 canny_img = cv2.Canny(img_gray, 150, 220, apertureSize=3)
 
-_,contours, hierarchy = cv2.findContours(canny_img, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE) # for CV2
-#印出輪廓數量
-print("Contours: ",len(contours))
+_, contours, hierarchy = cv2.findContours(canny_img, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)  # for CV2
+# 印出輪廓數量
+print("Contours: ", len(contours))
 print("\n\n\n***************************************************************************\n")
 
 area_pos = []
@@ -489,15 +511,15 @@ for i in range(0, len(contours)):
         continue
     if (circle_pos[0] == None) or (circle_pos[1] == None):
         continue
-    #print circle_pos
+    # print circle_pos
 
-    #x, y, w, h = cv2.boundingRect(hull)
-    #cv2.rectangle(image, (x, y), (x+w, y+h), (0, 255, 0), 2)
+    # x, y, w, h = cv2.boundingRect(hull)
+    # cv2.rectangle(image, (x, y), (x+w, y+h), (0, 255, 0), 2)
 
     rect = cv2.minAreaRect(hull)
-    box = cv2.cv.BoxPoints(rect)
+    box = cv2.boxPoints(rect)
     box = np.int0(box)
-    #cv2.drawContours(image, [box], 0, (0, 0, 255), 1)
+    # cv2.drawContours(image, [box], 0, (0, 0, 255), 1)
 
     a1 = CalculateTwoPointDistance(box[0], box[1])
     a2 = CalculateTwoPointDistance(box[1], box[2])
@@ -525,7 +547,6 @@ if not rect_pos:
     exit()
 idx_pos = CheckCluster(rect_center, rect_wh)
 
-
 for idx in idx_pos:
     for pos in rect_pos[idx]:
         area_pos.append(pos)
@@ -534,16 +555,16 @@ area_pos = np.array(area_pos)
 
 hull = cv2.convexHull(area_pos)
 rect = cv2.minAreaRect(area_pos)
-box = cv2.cv.BoxPoints(rect)
+box = cv2.boxPoints(rect)
 box = np.int0(box)
 x, y, w, h = cv2.boundingRect(hull)
-cv2.rectangle(image, (x, y), (x+w, y+h), (0, 255, 0), 1)
+cv2.rectangle(image, (x, y), (x + w, y + h), (0, 255, 0), 1)
 cv2.drawContours(image, [hull], -1, (255, 0, 255), 1)
 cv2.drawContours(image, [box], 0, (0, 0, 255), 1)
 
-#print hull
-#print rect_wh[idx_pos[0]][2], rect_wh[idx_pos[0]][0]
-#print rect_wh[idx_pos[1]][2], rect_wh[idx_pos[1]][0]
+# print hull
+# print rect_wh[idx_pos[0]][2], rect_wh[idx_pos[0]][0]
+# print rect_wh[idx_pos[1]][2], rect_wh[idx_pos[1]][0]
 
 line_dir = PointConvertDegree(rect_center[idx_pos[0]], rect_center[idx_pos[1]])
 line_dir = DegreeMirror(line_dir)
@@ -552,30 +573,30 @@ dst = findSide(hull, line_dir)
 topRect = getTopSideRect(dst[0])
 bottomRect = getBopttomSideRect(dst[1])
 
-
 cv2.drawContours(image, [topRect], 0, (255, 0, 0), 2)
-#cv2.drawContours(image, [bottomRect], 0, (255, 0, 0), 2)
-print ("Top", topRect)
-print ("Bottom", bottomRect)
 
-#---------------------------------------------------------
+# cv2.drawContours(image, [bottomRect], 0, (255, 0, 0), 2)
+print("Top", topRect)
+print("Bottom", bottomRect)
+
+
+# ---------------------------------------------------------
 # Escape Keyboard Event
 def press(event):
     if event.key == u'escape':
         plt.close()
         cv2.destroyAllWindows()
+
+
 fig.canvas.mpl_connect('key_press_event', press)
 
-
-
-#顯示原圖 & output
+# 顯示原圖 & output
 plt.subplot(1, 2, 1), plt.imshow(image)
 plt.title('Original'), plt.xticks([]), plt.yticks([])
 
-#顯示canny圖
-plt.subplot(1, 2, 2), plt.imshow(canny_img, cmap = 'gray')
+# 顯示canny圖
+plt.subplot(1, 2, 2), plt.imshow(canny_img, cmap='gray')
 plt.title('Canny'), plt.xticks([]), plt.yticks([])
-
 
 image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
 

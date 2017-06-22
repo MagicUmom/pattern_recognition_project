@@ -113,3 +113,7 @@ dataset/false_resize_square/
 dataset/true_resize_square/
 
 tt\.png
+
+dataset/true_resize_rotate/
+
+test\.png

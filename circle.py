@@ -9,8 +9,10 @@ import time
 import sys
 import math
 import operator
+import os
 
-pic_path = 'z12.jpg'
+pic_path = 'dataset/true/1.png'
+pic_dir = 'dataset/true_resize_rotate/'
 rect_scale = 5
 rect_area = 0
 rect_min_area = 0.0010
@@ -29,7 +31,7 @@ def CalculateOneLineAndOnePointMinDistance(a,b,c):
     if (linalg.norm(u) > 0):
         L = abs(cross(u, v) / linalg.norm(u))
     else:
-        L = sys.maxint
+        L = int()
     return L
 
 def CalculateTwoPointDistance(src, dst):
@@ -437,150 +439,166 @@ def FindZebraCrossing(filePath):
     return None
 
 #---------------------------------------------------------
-fig = plt.figure()
-srcImg = image = cv2.imread(pic_path)
+def main():
+    for im_name in os.listdir(pic_dir):
+        # im = Image.open(pic_dir + image)
+        print(im_name)
 
-pic_width = image.shape[1]
-pic_height = image.shape[0]
+        srcImg = image = cv2.imread(pic_dir+im_name)
+        pic_width = image.shape[1]
+        pic_height = image.shape[0]
 
-rect_area = np.int((pic_width * pic_height * 1.0) * rect_min_area)
-
-
-# Color Filter
-hsv = cv2.cvtColor(srcImg, cv2.COLOR_BGR2HSV)
-low_color = np.array([0, 0, hvs_luminance])
-#low_color = np.array([0, 0, 180])
-upper_color = np.array([180, 43, 255])
-mask = cv2.inRange(hsv, low_color, upper_color)
-res = cv2.bitwise_and(srcImg, srcImg, mask=mask)
-
-# Fix Image Color
-image = cv2.cvtColor(srcImg, cv2.COLOR_BGR2RGB)
-
-#canny
-img_gray = cv2.cvtColor(res, cv2.COLOR_BGR2GRAY)
-canny_img = cv2.Canny(img_gray, 150, 220, apertureSize=3)
-
-_,contours, hierarchy = cv2.findContours(canny_img, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE) # for CV2
-#印出輪廓數量
-print("Contours: ",len(contours))
-print("\n\n\n***************************************************************************\n")
-
-area_pos = []
-rect_pos = []
-rect_center = []
-rect_wh = []
-
-for i in range(0, len(contours)):
-    hull = cv2.convexHull(contours[i])
-    if len(hull) < 5:
-        continue
-
-    # 計算重心
-    moments = cv2.moments(hull)
-    m00 = moments['m00']
-    centroid_x, centroid_y = None, None
-    if m00 != 0:
-        centroid_x = int(moments['m10'] / m00)  # Take X coordinate
-        centroid_y = int(moments['m01'] / m00)  # Take Y coordinate
-    circle_pos = (centroid_x, centroid_y)
-
-    if len(circle_pos) != 2:
-        continue
-    if (circle_pos[0] == None) or (circle_pos[1] == None):
-        continue
-    #print circle_pos
-
-    #x, y, w, h = cv2.boundingRect(hull)
-    #cv2.rectangle(image, (x, y), (x+w, y+h), (0, 255, 0), 2)
-
-    rect = cv2.minAreaRect(hull)
-    box = cv2.cv.BoxPoints(rect)
-    box = np.int0(box)
-    #cv2.drawContours(image, [box], 0, (0, 0, 255), 1)
-
-    a1 = CalculateTwoPointDistance(box[0], box[1])
-    a2 = CalculateTwoPointDistance(box[1], box[2])
-    box_w = max(a1, a2)
-    box_h = min(a1, a2)
-    if box_h <= 0:
-        continue
-    box_scale = (box_w / box_h)
-    box_area = (box_w * box_h)
-    if box_w == a1:
-        box_angle = PointConvertDegree(box[0], box[1])
-    else:
-        box_angle = PointConvertDegree(box[1], box[2])
-
-    if box_scale > rect_scale and box_area > rect_area:
-        box_color = GetRectColor(image, [box])
-        if box_color[0] > color_range and box_color[1] > color_range and box_color[2] > color_range:
-            cv2.drawContours(image, [box], 0, (0, 0, 255), 1)
-            drawPoint(image, circle_pos, 5, (255, 0, 0))
-            rect_pos.append(hull)
-            rect_center.append(circle_pos)
-            rect_wh.append([box_w, box_h, box_angle])
-
-if not rect_pos:
-    exit()
-idx_pos = CheckCluster(rect_center, rect_wh)
+        rect_area = np.int((pic_width * pic_height * 1.0) * rect_min_area)
 
 
-for idx in idx_pos:
-    for pos in rect_pos[idx]:
-        area_pos.append(pos)
+        # Color Filter
+        hsv = cv2.cvtColor(srcImg, cv2.COLOR_BGR2HSV)
+        low_color = np.array([0, 0, hvs_luminance])
+        #low_color = np.array([0, 0, 180])
+        upper_color = np.array([180, 43, 255])
+        mask = cv2.inRange(hsv, low_color, upper_color)
+        res = cv2.bitwise_and(srcImg, srcImg, mask=mask)
 
-area_pos = np.array(area_pos)
+        # Fix Image Color
+        image = cv2.cvtColor(srcImg, cv2.COLOR_BGR2RGB)
 
-hull = cv2.convexHull(area_pos)
-rect = cv2.minAreaRect(area_pos)
-box = cv2.cv.BoxPoints(rect)
-box = np.int0(box)
-x, y, w, h = cv2.boundingRect(hull)
-cv2.rectangle(image, (x, y), (x+w, y+h), (0, 255, 0), 1)
-cv2.drawContours(image, [hull], -1, (255, 0, 255), 1)
-cv2.drawContours(image, [box], 0, (0, 0, 255), 1)
+        #canny
+        img_gray = cv2.cvtColor(res, cv2.COLOR_BGR2GRAY)
+        canny_img = cv2.Canny(img_gray, 150, 220, apertureSize=3)
 
-#print hull
-#print rect_wh[idx_pos[0]][2], rect_wh[idx_pos[0]][0]
-#print rect_wh[idx_pos[1]][2], rect_wh[idx_pos[1]][0]
+        _,contours, hierarchy = cv2.findContours(canny_img, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE) # for CV2
+        #印出輪廓數量
+        # print("Contours: ",len(contours))
+        # print("\n\n\n***************************************************************************\n")
 
-line_dir = PointConvertDegree(rect_center[idx_pos[0]], rect_center[idx_pos[1]])
-line_dir = DegreeMirror(line_dir)
+        area_pos = []
+        rect_pos = []
+        rect_center = []
+        rect_wh = []
 
-dst = findSide(hull, line_dir)
-topRect = getTopSideRect(dst[0])
-bottomRect = getBopttomSideRect(dst[1])
+        for i in range(0, len(contours)):
+            hull = cv2.convexHull(contours[i])
+            if len(hull) < 5:
+                continue
+
+            # 計算重心
+            moments = cv2.moments(hull)
+            m00 = moments['m00']
+            centroid_x, centroid_y = None, None
+            if m00 != 0:
+                centroid_x = int(moments['m10'] / m00)  # Take X coordinate
+                centroid_y = int(moments['m01'] / m00)  # Take Y coordinate
+            circle_pos = (centroid_x, centroid_y)
+
+            if len(circle_pos) != 2:
+                continue
+            if (circle_pos[0] == None) or (circle_pos[1] == None):
+                continue
+            #print circle_pos
+
+            #x, y, w, h = cv2.boundingRect(hull)
+            #cv2.rectangle(image, (x, y), (x+w, y+h), (0, 255, 0), 2)
+
+            rect = cv2.minAreaRect(hull)
+            box = cv2.boxPoints(rect)
+            box = np.int0(box)
+            #cv2.drawContours(image, [box], 0, (0, 0, 255), 1)
+
+            a1 = CalculateTwoPointDistance(box[0], box[1])
+            a2 = CalculateTwoPointDistance(box[1], box[2])
+            box_w = max(a1, a2)
+            box_h = min(a1, a2)
+            if box_h <= 0:
+                continue
+            box_scale = (box_w / box_h)
+            box_area = (box_w * box_h)
+            if box_w == a1:
+                box_angle = PointConvertDegree(box[0], box[1])
+            else:
+                box_angle = PointConvertDegree(box[1], box[2])
+
+            if box_scale > rect_scale and box_area > rect_area:
+                box_color = GetRectColor(image, [box])
+                if box_color[0] > color_range and box_color[1] > color_range and box_color[2] > color_range:
+                    # cv2.drawContours(image, [box], 0, (0, 0, 255), 1)
+                    # drawPoint(image, circle_pos, 5, (255, 0, 0))
+                    rect_pos.append(hull)
+                    rect_center.append(circle_pos)
+                    rect_wh.append([box_w, box_h, box_angle])
+
+        if not rect_pos:
+            pass
+        #     exit()
+        else :
+            try :
+                idx_pos = CheckCluster(rect_center, rect_wh)
+
+                for idx in idx_pos:
+                    for pos in rect_pos[idx]:
+                        area_pos.append(pos)
+
+                area_pos = np.array(area_pos)
+
+                hull = cv2.convexHull(area_pos)
+                rect = cv2.minAreaRect(area_pos)
+                box = cv2.boxPoints(rect)
+                box = np.int0(box)
+                x, y, w, h = cv2.boundingRect(hull)
+                print(x,y,w,h)
+                im = image[y:y+h,x:x+w]
+                cv2.imwrite('dataset/true_for_train/' + im_name ,im)
+            except :
+                print("**** except #2 **** \n")
+                pass
+
+            # cv2.rectangle(image, (x, y), (x+w, y+h), (0, 255, 0), 1)
+        # cv2.drawContours(image, [hull], -1, (255, 0, 255), 1)
+        # cv2.drawContours(image, [box], 0, (0, 0, 255), 1)
+
+        #print hull
+        #print rect_wh[idx_pos[0]][2], rect_wh[idx_pos[0]][0]
+        #print rect_wh[idx_pos[1]][2], rect_wh[idx_pos[1]][0]
+
+        # line_dir = PointConvertDegree(rect_center[idx_pos[0]], rect_center[idx_pos[1]])
+        # line_dir = DegreeMirror(line_dir)
+        #
+        # dst = findSide(hull, line_dir)
+        # topRect = getTopSideRect(dst[0])
+        # bottomRect = getBopttomSideRect(dst[1])
+        #
+        #
+        # cv2.drawContours(image, [topRect], 0, (255, 0, 0), 2)
+
+        #cv2.drawContours(image, [bottomRect], 0, (255, 0, 0), 2)
+        # print ("Top", topRect)
+        # print ("Bottom", bottomRect)
+
+        #---------------------------------------------------------
+        # Escape Keyboard Event
+        def press(event):
+            if event.key == u'escape':
+                plt.close()
+                cv2.destroyAllWindows()
+        # fig.canvas.mpl_connect('key_press_event', press)
 
 
-cv2.drawContours(image, [topRect], 0, (255, 0, 0), 2)
-#cv2.drawContours(image, [bottomRect], 0, (255, 0, 0), 2)
-print ("Top", topRect)
-print ("Bottom", bottomRect)
 
-#---------------------------------------------------------
-# Escape Keyboard Event
-def press(event):
-    if event.key == u'escape':
-        plt.close()
-        cv2.destroyAllWindows()
-fig.canvas.mpl_connect('key_press_event', press)
+    #顯示原圖 & output
+    # plt.subplot(1, 2, 1), plt.imshow(image)
+    # plt.title('Original'), plt.xticks([]), plt.yticks([])
+    #
+    # #顯示canny圖
+    # plt.subplot(1, 2, 2), plt.imshow(canny_img, cmap = 'gray')
+    # plt.title('Canny'), plt.xticks([]), plt.yticks([])
+    #
+    #
+    # image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
+    #
+    # plt.show()
+    #
+    # print("\n***************************************************************************")
+    # print(" End")
+    # print("***************************************************************************")
 
-
-
-#顯示原圖 & output
-plt.subplot(1, 2, 1), plt.imshow(image)
-plt.title('Original'), plt.xticks([]), plt.yticks([])
-
-#顯示canny圖
-plt.subplot(1, 2, 2), plt.imshow(canny_img, cmap = 'gray')
-plt.title('Canny'), plt.xticks([]), plt.yticks([])
-
-
-image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
-
-plt.show()
-
-print("\n***************************************************************************")
-print(" End")
-print("***************************************************************************")
+if __name__ == '__main__':
+    main()

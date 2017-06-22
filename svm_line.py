@@ -35,8 +35,10 @@ def prepareTraningDataSet(images_true, targets_true, images_false, targets_false
     return np.array(img_train) , np.array(target_train), np.array(img_test), np.array(target_test)
 
 def main():
-    img_true_dir = "dataset/true_resize/"
-    img_false_dir = "dataset/false_resize/"
+    # img_true_dir = "dataset/true_resize/"
+    # img_false_dir = "dataset/false_resize/"
+    img_true_dir = "dataset/true_resize_square/"
+    img_false_dir = "dataset/false_resize_square/"
     images_true = []
     targets_true = []
     images_false = []
@@ -57,7 +59,7 @@ def main():
             break
 
 
-    test_ratio = 0.6 # train_data : dataset = 9 : 10
+    test_ratio = 0.9 # train_data : dataset = 9 : 10
     img_train , target_train, img_test, target_test= prepareTraningDataSet(images_true, targets_true, images_false, targets_false , test_ratio)
 
     # img_train = images[0::2]

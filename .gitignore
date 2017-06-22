@@ -117,3 +117,5 @@ tt\.png
 dataset/true_resize_rotate/
 
 test\.png
+
+dataset/true_for_train/

@@ -10,7 +10,7 @@ import sys
 import math
 import operator
 
-pic_path = 'z12.jpg'
+pic_path = 'dataset/true/11.png'
 rect_scale = 5
 rect_area = 0
 rect_min_area = 0.0010
@@ -29,7 +29,7 @@ def CalculateOneLineAndOnePointMinDistance(a,b,c):
     if (linalg.norm(u) > 0):
         L = abs(cross(u, v) / linalg.norm(u))
     else:
-        L = sys.maxint
+        L = int()
     return L
 
 def CalculateTwoPointDistance(src, dst):
@@ -495,7 +495,7 @@ for i in range(0, len(contours)):
     #cv2.rectangle(image, (x, y), (x+w, y+h), (0, 255, 0), 2)
 
     rect = cv2.minAreaRect(hull)
-    box = cv2.cv.BoxPoints(rect)
+    box = cv2.boxPoints(rect)
     box = np.int0(box)
     #cv2.drawContours(image, [box], 0, (0, 0, 255), 1)
 
@@ -534,7 +534,7 @@ area_pos = np.array(area_pos)
 
 hull = cv2.convexHull(area_pos)
 rect = cv2.minAreaRect(area_pos)
-box = cv2.cv.BoxPoints(rect)
+box = cv2.boxPoints(rect)
 box = np.int0(box)
 x, y, w, h = cv2.boundingRect(hull)
 cv2.rectangle(image, (x, y), (x+w, y+h), (0, 255, 0), 1)

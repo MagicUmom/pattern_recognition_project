@@ -57,7 +57,7 @@ def main():
             break
 
 
-    test_ratio = 0.5 # train_data : dataset = 9 : 10
+    test_ratio = 0.6 # train_data : dataset = 9 : 10
     img_train , target_train, img_test, target_test= prepareTraningDataSet(images_true, targets_true, images_false, targets_false , test_ratio)
 
     # img_train = images[0::2]

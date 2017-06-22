@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e48911d5-5db5-4cdc-a8d9-4beeaa5b8075" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/circle.py" afterPath="$PROJECT_DIR$/circle.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/svm_line.py" afterPath="$PROJECT_DIR$/svm_line.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resize.py" afterPath="$PROJECT_DIR$/resize.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -25,11 +26,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="circle.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="circle.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/circle.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="567" column="0" lean-forward="true" selection-start-line="567" selection-start-column="0" selection-end-line="567" selection-end-column="0" />
+            <state relative-caret-position="402">
+              <caret line="442" column="26" lean-forward="true" selection-start-line="442" selection-start-column="26" selection-end-line="442" selection-end-column="26" />
               <folding>
                 <element signature="e#17#35#0" expanded="true" />
               </folding>
@@ -49,11 +50,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="svm_line.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="svm_line.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/svm_line.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="884">
-              <caret line="52" column="88" lean-forward="true" selection-start-line="52" selection-start-column="88" selection-end-line="52" selection-end-column="88" />
+            <state relative-caret-position="-327">
+              <caret line="20" column="64" lean-forward="false" selection-start-line="20" selection-start-column="64" selection-end-line="20" selection-end-column="64" />
               <folding>
                 <element signature="e#37#58#0" expanded="true" />
               </folding>
@@ -76,8 +77,8 @@
       <file leaf-file-name="resize.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resize.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" column="28" lean-forward="false" selection-start-line="3" selection-start-column="16" selection-end-line="3" selection-end-column="28" />
+            <state relative-caret-position="357">
+              <caret line="21" column="28" lean-forward="false" selection-start-line="21" selection-start-column="28" selection-end-line="21" selection-end-column="28" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -94,15 +95,22 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>hull</find>
+      <find>findSide</find>
+      <find>pic_path</find>
+    </findStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/resize.py" />
         <option value="$PROJECT_DIR$/mysvm.py" />
         <option value="$PROJECT_DIR$/svm_line.py" />
+        <option value="$PROJECT_DIR$/resize.py" />
         <option value="$PROJECT_DIR$/circle.py" />
       </list>
     </option>
@@ -352,9 +360,9 @@
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Python.circle" />
-        <item index="1" class="java.lang.String" itemvalue="Python.svm_line" />
-        <item index="2" class="java.lang.String" itemvalue="Python.mysvm" />
-        <item index="3" class="java.lang.String" itemvalue="Python.resize" />
+        <item index="1" class="java.lang.String" itemvalue="Python.resize" />
+        <item index="2" class="java.lang.String" itemvalue="Python.svm_line" />
+        <item index="3" class="java.lang.String" itemvalue="Python.mysvm" />
         <item index="4" class="java.lang.String" itemvalue="Python.face_recognition" />
       </list>
     </recent_temporary>
@@ -857,16 +865,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resize.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="28" lean-forward="false" selection-start-line="3" selection-start-column="16" selection-end-line="3" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mysvm.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="846">
@@ -885,22 +883,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/circle.py">
+    <entry file="file://$PROJECT_DIR$/svm_line.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="567" column="0" lean-forward="true" selection-start-line="567" selection-start-column="0" selection-end-line="567" selection-end-column="0" />
+        <state relative-caret-position="-327">
+          <caret line="20" column="64" lean-forward="false" selection-start-line="20" selection-start-column="64" selection-end-line="20" selection-end-column="64" />
           <folding>
-            <element signature="e#17#35#0" expanded="true" />
+            <element signature="e#37#58#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/svm_line.py">
+    <entry file="file://$PROJECT_DIR$/resize.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="884">
-          <caret line="52" column="88" lean-forward="true" selection-start-line="52" selection-start-column="88" selection-end-line="52" selection-end-column="88" />
+        <state relative-caret-position="357">
+          <caret line="21" column="28" lean-forward="false" selection-start-line="21" selection-start-column="28" selection-end-line="21" selection-end-column="28" />
           <folding>
-            <element signature="e#37#58#0" expanded="true" />
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/circle.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="402">
+          <caret line="442" column="26" lean-forward="true" selection-start-line="442" selection-start-column="26" selection-end-line="442" selection-end-column="26" />
+          <folding>
+            <element signature="e#17#35#0" expanded="true" />
           </folding>
         </state>
       </provider>

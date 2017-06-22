@@ -107,3 +107,9 @@ dataset/true/
 dataset/false_resize/
 
 dataset/true_resize/
+
+dataset/false_resize_square/
+
+dataset/true_resize_square/
+
+tt\.png

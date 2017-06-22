@@ -4,16 +4,16 @@ from PIL import Image
 img_true_dir = "dataset/true/"
 img_false_dir = "dataset/false/"
 
-target_path = "dataset/false_resize/"
+target_path = "dataset/true_resize_square/"
 
 min_w = 636
 min_h = 397
 
 width = 200
-height = 120
+height = 200
 
-for image in os.listdir(img_false_dir):
-    im = Image.open(img_false_dir+image)
+for image in os.listdir(img_true_dir):
+    im = Image.open(img_true_dir+image)
     # w,h = im.size
     # ratio = float(min_h) / im.size[1]
     # width = int(im.size[0] * ratio)

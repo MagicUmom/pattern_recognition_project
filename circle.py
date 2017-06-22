@@ -10,7 +10,7 @@ import sys
 import math
 import operator
 
-pic_path = 'dataset/true/11.png'
+pic_path = 'dataset/true/5.png'
 rect_scale = 5
 rect_area = 0
 rect_min_area = 0.0010
@@ -554,6 +554,7 @@ bottomRect = getBopttomSideRect(dst[1])
 
 
 cv2.drawContours(image, [topRect], 0, (255, 0, 0), 2)
+
 #cv2.drawContours(image, [bottomRect], 0, (255, 0, 0), 2)
 print ("Top", topRect)
 print ("Bottom", bottomRect)
